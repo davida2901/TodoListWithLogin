@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">TodoList</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Email strings -->
+    <string name="email">Email:</string>
+    <string name="password">Password:</string>
+    <string name="register">Register</string>
+    <string name="cancel">cancel</string>
+    <string name="name">Name:</string>
+    <string name="lastname">Last name:</string>
+    <string name="phonenumber">Phone number:</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="gender">Gender:</string>
+    <string name="address">Address:</string>
+    <string name="login">Login</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="already_register">Already Register!!!</string>
+    <string name="not_registered_yet">Not registered yet!!</string>
+    <string name="tasks">Tasks</string>
+    <string name="create_new_task">Create new task</string>
+    <string name="add_new_task">Add new task</string>
+    <string name="add_task">Add Task</string>
+    <string name="manage_tasks">Manage Tasks</string>
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="16dp"
+    tools:context=".fragments.LoginFragment">
+
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="426dp"
+        android:layout_height="219dp"
+        app:srcCompat="@drawable/login"
+        tools:src="@drawable/login" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
+    
+    <EditText
+        android:layout_width="match_parent"
+        android:hint="@string/email"
+        android:textSize="24sp"
+        android:inputType="textEmailAddress"
+        android:id="@+id/editTextLoginEmail"
+        android:layout_height="wrap_content" />
+    
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextLoginPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textSize="24sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="134dp"
+            android:text="@string/login"
+            android:id="@+id/buttonLogin"
+            android:layout_height="wrap_content" />
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:layout_width="134dp"
+            android:id="@+id/buttonGotoRegister"
+            android:text="@string/register"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/forgot_your_password"/>
+
+</LinearLayout>
