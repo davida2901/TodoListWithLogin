@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog.*
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,11 +29,11 @@ class ToDoListFragment : Fragment(), CreateTaskListener, ToDoAdapterInterface {
     private lateinit var databaseRef: DatabaseReference
     private lateinit var navController: NavController
     private lateinit var binding: FragmentToDoListBinding
-    private lateinit var dialogFragment: AddTaskDialogFragment
+    private  var dialogFragment: AddTaskDialogFragment? = null
     private lateinit var adapter: ToDoAdapter
     private lateinit var mTaskList : MutableList<ToDoData>
 
-    private lateinit var builder: Builder
+    private lateinit var builder: AlertDialog.Builder
 
 
     override fun onCreateView(
@@ -63,11 +62,15 @@ class ToDoListFragment : Fragment(), CreateTaskListener, ToDoAdapterInterface {
 
     private fun addTask() {
         binding.buttonAddNewTask.setOnClickListener{
+            if (dialogFragment !=null){
+                childFragmentManager.beginTransaction().remove(dialogFragment!!).commit()
+            }
+
             dialogFragment = AddTaskDialogFragment()
-            dialogFragment.setListener(this)
-            dialogFragment.show(
+            dialogFragment!!.setListener(this)
+            dialogFragment!!.show(
                 childFragmentManager,
-                "AddTaskDialogFragment"
+                AddTaskDialogFragment.TAG
             )
         }
     }
@@ -90,17 +93,9 @@ class ToDoListFragment : Fragment(), CreateTaskListener, ToDoAdapterInterface {
 
 
 
-    override fun onCreateTask(todo: String, todoEditText: EditText) {
-        databaseRef.push().setValue(todo).addOnCompleteListener{
-            if (it.isSuccessful){
-                Toast.makeText(context, "Task saved successfully", Toast.LENGTH_SHORT).show()
-                todoEditText.text = null
-            }else{
-                Toast.makeText(context, it.exception?.message, Toast.LENGTH_SHORT).show()
-            }
-            dialogFragment.dismiss()
-        }
-    }
+
+
+
 
     private fun getDataFromFireBase(){
         databaseRef.addValueEventListener(object: ValueEventListener{
@@ -125,27 +120,79 @@ class ToDoListFragment : Fragment(), CreateTaskListener, ToDoAdapterInterface {
         })
     }
 
-
-
-
-    override fun onDeleteTaskClicked(toDoData: ToDoData) {
-
-
-        databaseRef.child(toDoData.taskId).removeValue().addOnCompleteListener{
-            if(it.isSuccessful){
-                Toast.makeText(context, "Task deleted successfully", Toast.LENGTH_SHORT).show()
+    override fun onCreateTask(todo: String, todoEditText: EditText) {
+        databaseRef.push().setValue(todo).addOnCompleteListener{
+            if (it.isSuccessful){
+                Toast.makeText(context, "Task saved successfully", Toast.LENGTH_SHORT).show()
+                todoEditText.text = null
             }else{
                 Toast.makeText(context, it.exception?.message, Toast.LENGTH_SHORT).show()
             }
+            todoEditText.text = null
+            dialogFragment!!.dismiss()
         }
     }
 
 
 
 
+    override fun onDeleteTaskClicked(toDoData: ToDoData) {
+
+        builder = AlertDialog.Builder(this.context)
+
+        builder.setTitle("Delete Task")
+            .setMessage("You want to delete this task?")
+            .setCancelable(true)
+            .setPositiveButton("Yes"){
+                dialogInterface, it ->
+                databaseRef.child(toDoData.taskId).removeValue().addOnCompleteListener{
+                    if(it.isSuccessful){
+                        Toast.makeText(context, "Task deleted successfully", Toast.LENGTH_SHORT).show()
+                    }else{
+                        Toast.makeText(context, it.exception?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+            .setNegativeButton("No"){
+                dialogInterface, it->
+                dialogInterface.cancel()
+            }
+            .show()
+
+//        databaseRef.child(toDoData.taskId).removeValue().addOnCompleteListener{
+//            if(it.isSuccessful){
+//                Toast.makeText(context, "Task deleted successfully", Toast.LENGTH_SHORT).show()
+//            }else{
+//                Toast.makeText(context, it.exception?.message, Toast.LENGTH_SHORT).show()
+//            }
+//        }
+
+    }
+
+
+    override fun onUpdateTask(toDoData: ToDoData, todoEditText: EditText) {
+        val map = HashMap<String, Any>()
+        map[toDoData.taskId] = toDoData.task
+        databaseRef.updateChildren(map).addOnCompleteListener{
+            if(it.isSuccessful){
+                Toast.makeText(context, "Task updated successfully", Toast.LENGTH_SHORT).show()
+            }else{
+                Toast.makeText(context, it.exception?.message, Toast.LENGTH_SHORT).show()
+            }
+            todoEditText.text = null
+            dialogFragment!!.dismiss()
+        }
+    }
+
 
     override fun onEditTaskClicked(toDoData: ToDoData) {
-        TODO("Not yet implemented")
+        if(dialogFragment !=null){
+            childFragmentManager.beginTransaction().remove(dialogFragment!!).commit()
+
+        }
+        dialogFragment = AddTaskDialogFragment.newInstance(toDoData.taskId, toDoData.task)
+        dialogFragment!!.setListener(this)
+        dialogFragment!!.show(childFragmentManager, AddTaskDialogFragment.TAG)
     }
 
 

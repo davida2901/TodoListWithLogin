@@ -11,7 +11,7 @@ import com.example.todolist.fragments.task.ToDoAdapterInterface
 class ToDoAdapter(private val list: MutableList<ToDoData>) : RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>() {
 
     private var listener : ToDoAdapterInterface? = null
-
+    lateinit var builder : AlertDialog.Builder
 
     fun setListener(listener: ToDoAdapterInterface){
         this.listener = listener

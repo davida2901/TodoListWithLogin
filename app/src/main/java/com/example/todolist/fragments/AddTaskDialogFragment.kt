@@ -10,14 +10,28 @@ import androidx.fragment.app.DialogFragment
 import com.example.todolist.R
 import com.example.todolist.databinding.FragmentAddTaskDialogBinding
 import com.example.todolist.fragments.task.CreateTaskListener
+import com.example.todolist.utils.ToDoData
 
 class AddTaskDialogFragment : DialogFragment() {
 
     private lateinit var binding : FragmentAddTaskDialogBinding
     private lateinit var listener : CreateTaskListener
+    private var toDoData : ToDoData? = null
 
     fun setListener(listener: CreateTaskListener){
         this.listener = listener
+    }
+
+    companion object{
+        const val TAG ="AddTaskDialogFragment"
+
+        @JvmStatic
+        fun newInstance(taskId:String, task: String)= AddTaskDialogFragment().apply {
+            arguments = Bundle().apply {
+                putString("taskId", taskId)
+                putString("task",task)
+            }
+        }
     }
 
 
@@ -33,7 +47,15 @@ class AddTaskDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
+
+        if(arguments !=null){
+            toDoData = ToDoData(
+                arguments?.getString("taskId").toString(),
+                arguments?.getString("task").toString()
+            )
+            binding.editTextCreateTask.setText(toDoData?.task)
+        }
         createTask()
     }
 
@@ -42,7 +64,12 @@ class AddTaskDialogFragment : DialogFragment() {
             val todoTask = binding.editTextCreateTask.text.toString().trim()
 
             if (todoTask.isNotEmpty()){
-                listener.onCreateTask(todoTask, binding.editTextCreateTask)
+                if(toDoData ==null){
+                    listener.onCreateTask(todoTask, binding.editTextCreateTask)
+                }else{
+                    toDoData?.task = todoTask
+                    listener.onUpdateTask(toDoData!!, binding.editTextCreateTask)
+                }
             }else{
                 Toast.makeText(context, "Please enter your task", Toast.LENGTH_SHORT).show()
             }

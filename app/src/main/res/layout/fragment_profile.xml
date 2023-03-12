@@ -13,6 +13,12 @@
         android:text="@string/manage_tasks"
         android:layout_marginHorizontal="10dp"/>
 
+    <Button
+        android:id="@+id/buttonCloseSession"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="@string/close_session" />
 
 
 </LinearLayout>

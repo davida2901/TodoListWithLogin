@@ -45,8 +45,10 @@ class ProfileFragment : Fragment() {
     private fun closeSession() {
         binding.buttonGoToTask.setOnClickListener{
             navController.navigate(R.id.action_profileFragment_to_toDoListFragment)
-
-
+        }
+        binding.buttonCloseSession.setOnClickListener{
+            auth.signOut()
+            navController.navigate(R.id.action_profileFragment_to_loginFragment)
         }
     }
 
