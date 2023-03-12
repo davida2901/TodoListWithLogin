@@ -24,4 +24,5 @@
     <string name="add_new_task">Add new task</string>
     <string name="add_task">Add Task</string>
     <string name="manage_tasks">Manage Tasks</string>
+    <string name="item1">item1</string>
 </resources>
