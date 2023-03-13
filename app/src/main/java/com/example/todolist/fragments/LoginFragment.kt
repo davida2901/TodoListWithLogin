@@ -34,6 +34,14 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+//        auth = FirebaseAuth.getInstance()
+//
+//        val currentUser = auth.currentUser
+//        if(currentUser != null){
+//            navController.navigate(R.id.action_loginFragment_to_profileFragment)
+//        }
+
         init(view)
         Login()
     }
