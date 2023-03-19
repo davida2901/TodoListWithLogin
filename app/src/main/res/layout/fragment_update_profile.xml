@@ -6,21 +6,7 @@
     android:layout_marginVertical="10dp"
     android:layout_marginHorizontal="10dp"
     android:orientation="vertical"
-    tools:context=".fragments.ProfileFragment">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:hint="@string/email"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:id="@+id/emailTextView"
-        />
+    tools:context=".fragments.UpdateProfileFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -29,11 +15,11 @@
         android:textStyle="bold"
         android:hint="@string/name"/>
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:id="@+id/nameTextView"
+        android:id="@+id/nameUpdateTextView"
         />
 
     <TextView
@@ -43,11 +29,11 @@
         android:textStyle="bold"
         android:hint="@string/lastname"/>
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:id="@+id/lastNameTextView"
+        android:id="@+id/lastNameUpdateTextView"
         />
 
     <TextView
@@ -57,11 +43,11 @@
         android:textStyle="bold"
         android:hint="@string/phonenumber"/>
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:id="@+id/phoneNumberTextView"
+        android:id="@+id/phoneNumberUpdateTextView"
         />
 
     <TextView
@@ -71,37 +57,31 @@
         android:textStyle="bold"
         android:hint="@string/address"/>
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:id="@+id/addressTextView"
+        android:id="@+id/addressUpdateTextView"
         />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
-
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonGoToUpdateProfile"
-        android:text="@string/update_profile"
+        android:id="@+id/buttonSaveProfile"
+        android:text="@string/save_profile"
+        android:layout_marginHorizontal="10dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonCancelUpdate"
+        android:text="@string/cancel"
         android:layout_marginHorizontal="10dp"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonGoToTask"
-        android:text="@string/manage_tasks"
-        android:layout_marginHorizontal="10dp"/>
 
-    <Button
-        android:id="@+id/buttonCloseSession"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="@string/close_session" />
+
 
 
 </LinearLayout>

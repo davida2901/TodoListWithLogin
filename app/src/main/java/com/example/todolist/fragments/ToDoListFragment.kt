@@ -44,7 +44,9 @@ class ToDoListFragment : Fragment(), CreateTaskListener, ToDoAdapterInterface {
 
         binding = FragmentToDoListBinding.inflate(inflater,container,false)
 
-
+        binding.buttonCancelTask.setOnClickListener{
+            navController.navigate(R.id.profileFragment)
+        }
 
         return binding.root
     }
@@ -90,10 +92,6 @@ class ToDoListFragment : Fragment(), CreateTaskListener, ToDoAdapterInterface {
         adapter.setListener(this)
         binding.recyclerViewTasks.adapter = adapter
     }
-
-
-
-
 
 
 

@@ -26,4 +26,6 @@
     <string name="manage_tasks">Manage Tasks</string>
     <string name="item1">item1</string>
     <string name="close_session">Close Session</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="update_profile">Update Profile</string>
 </resources>

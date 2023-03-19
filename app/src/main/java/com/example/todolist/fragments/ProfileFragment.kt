@@ -81,6 +81,10 @@ class ProfileFragment : Fragment() {
             }
 
         })
+
+        binding.buttonGoToUpdateProfile.setOnClickListener{
+            navController.navigate(R.id.action_profileFragment_to_updateProfileFragment)
+        }
     }
 
 
