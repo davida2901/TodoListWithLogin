@@ -52,7 +52,7 @@ class AddTaskDialogFragment : DialogFragment() {
         if(arguments !=null){
             toDoData = ToDoData(
                 arguments?.getString("taskId").toString(),
-                arguments?.getString("task").toString()
+                arguments?.getString("task").toString(),
             )
             binding.editTextCreateTask.setText(toDoData?.task)
         }
@@ -62,6 +62,7 @@ class AddTaskDialogFragment : DialogFragment() {
     private fun createTask() {
         binding.buttonCreateTask.setOnClickListener{
             val todoTask = binding.editTextCreateTask.text.toString().trim()
+            //val taskCompleted = binding.taskCompleted.text.toString().trim()
 
             if (todoTask.isNotEmpty()){
                 if(toDoData ==null){

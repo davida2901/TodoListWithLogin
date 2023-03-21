@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.todolist.R
@@ -20,6 +22,7 @@ class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var navController: NavController
     private lateinit var binding : FragmentLoginBinding
+    private lateinit var builder : AlertDialog.Builder
 
 
     override fun onCreateView(
@@ -44,6 +47,34 @@ class LoginFragment : Fragment() {
 
         init(view)
         Login()
+        resetPassword()
+    }
+
+    private fun resetPassword() {
+        binding.buttonResetPassword.setOnClickListener{
+            builder = AlertDialog.Builder(this.requireContext())
+            builder.setTitle("Reset Password")
+            val view: View = layoutInflater.inflate(R.layout.reset_password,null)
+            val email : EditText = view.findViewById(R.id.resetPasswordEmail)
+            builder.setView(view)
+            builder.setPositiveButton("Reset") { _, _ ->
+                forgotPassword(email)
+            }
+            builder.setNegativeButton("Cancel") { _, _ ->}
+            builder.show()
+        }
+    }
+
+    private fun forgotPassword(email: EditText){
+        if (email.text.toString().isNotEmpty()){
+            auth.sendPasswordResetEmail(email.text.toString().trim()).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(context, "Email sent successfully", Toast.LENGTH_SHORT)
+                }else{
+                    Toast.makeText(context, it.exception?.message, Toast.LENGTH_SHORT)
+                }
+            }
+        }
     }
 
     private fun init(view:View){

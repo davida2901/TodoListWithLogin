@@ -63,6 +63,7 @@ class ToDoListFragment : Fragment(), CreateTaskListener, ToDoAdapterInterface {
 
 
     private fun addTask() {
+
         binding.buttonAddNewTask.setOnClickListener{
             if (dialogFragment !=null){
                 childFragmentManager.beginTransaction().remove(dialogFragment!!).commit()
